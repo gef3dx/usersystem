@@ -3,3 +3,6 @@ venv/
 static/
 media/
 temp/
+users/migrations
+db.sqlite3
+req.txt
