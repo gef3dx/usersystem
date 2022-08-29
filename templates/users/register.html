@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="page-header page-header_main page-header_highlight">
+          <h1>Регистрация акаунта</h1>
+          <p>Что бы зарегистрироваться заполните все поля с *, и следуйте указаниям по заполнению полей</p>
+        </div>
+      </div>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            Регистрируясь, вы принимаете Условия обслуживания и Уведомление о конфиденциальности
+            <div class="form-group">
+                <button class="btn btn-info" type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Уже есть Акаунт? <a class="ml-2" href="/login">Войти</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="page-header page-header_main page-header_highlight">
+          <h1>Войди в свой аккаунт</h1>
+          <p>Для входа в свой аккаут введите email или Логин, и свой пароль.</p>
+        </div>
+      </div>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="form-group">
+                <button class="btn btn-info" type="submit">Вход</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Нужен Акаунт? <a class="ml-2" href="{% url 'register' %}">Зарегистрироваться</a>
+            </small><br>
+            <small class="text-muted">
+                <a href="{% url 'password_reset' %}">Забыл пароль?</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}
