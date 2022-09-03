@@ -16,14 +16,11 @@ from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from .models import SubscribedUsers
 
-def home(request):
-    return render(request=request, template_name='home.html')
-
 def activate(request, uidb64, token):
-    User = get_user_model()
+    user = get_user_model()
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
+        user = user.objects.get(pk=uid)
     except:
         user = None
 
@@ -40,7 +37,7 @@ def activate(request, uidb64, token):
 
 def activateEmail(request, user, to_email):
     mail_subject = "Activate your user account."
-    message = render_to_string("template_activate_account.html", {
+    message = render_to_string("users/template_activate_account.html", {
         'user': user.username,
         'domain': get_current_site(request).domain,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -153,7 +150,7 @@ def password_change(request):
                 messages.error(request, error)
 
     form = SetPasswordForm(user)
-    return render(request, 'password_reset_confirm.html', {'form': form})
+    return render(request, 'users/password_reset_confirm.html', {'form': form})
 
 @user_not_authenticated
 def password_reset_request(request):
@@ -164,7 +161,7 @@ def password_reset_request(request):
             associated_user = get_user_model().objects.filter(Q(email=user_email)).first()
             if associated_user:
                 subject = "Password Reset request"
-                message = render_to_string("template_reset_password.html", {
+                message = render_to_string("users/template_reset_password.html", {
                     'user': associated_user,
                     'domain': get_current_site(request).domain,
                     'uid': urlsafe_base64_encode(force_bytes(associated_user.pk)),
@@ -186,7 +183,7 @@ def password_reset_request(request):
                 else:
                     messages.error(request, "Problem sending reset password email, <b>SERVER PROBLEM</b>")
 
-            return redirect('homepage')
+            return redirect('home')
 
         for key, error in list(form.errors.items()):
             if key == 'captcha' and error[0] == 'This field is required.':
@@ -196,7 +193,7 @@ def password_reset_request(request):
     form = PasswordResetForm()
     return render(
         request=request, 
-        template_name="password_reset.html", 
+        template_name="users/password_reset.html",
         context={"form": form}
         )
 
@@ -214,13 +211,13 @@ def passwordResetConfirm(request, uidb64, token):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Your password has been set. You may go ahead and <b>log in </b> now.")
-                return redirect('homepage')
+                return redirect('home')
             else:
                 for error in list(form.errors.values()):
                     messages.error(request, error)
 
         form = SetPasswordForm(user)
-        return render(request, 'password_reset_confirm.html', {'form': form})
+        return render(request, 'users/password_reset_confirm.html', {'form': form})
     else:
         messages.error(request, "Link is expired")
 
