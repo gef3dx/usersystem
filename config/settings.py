@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tinymce',
     'fontawesomefree',
     'crispy_forms',
+    'message',
     #'captcha',
 ]
 
