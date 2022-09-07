@@ -1,8 +1,11 @@
 .idea/
 venv/
-static/
+static/admin
+static/django_tinymce
+static/fontawesomefree
+static/tinymce
 media/
 temp/
 users/migrations
-db.sqlite3
-req.txt
+message/migrations
+services/migrations
