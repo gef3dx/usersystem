@@ -80,7 +80,7 @@ def register(request):
 @login_required
 def custom_logout(request):
     logout(request)
-    messages.info(request, "Logged out successfully!")
+    messages.info(request, "Вы вышли из личного кабинета")
     return redirect("home")
 
 @user_not_authenticated
@@ -94,7 +94,7 @@ def custom_login(request):
             )
             if user is not None:
                 login(request, user)
-                messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
+                messages.success(request, f"Здравствуйте <b>{user.username}</b>! Вы вошли в личный кабинет.")
                 return redirect("home")
 
         else:
