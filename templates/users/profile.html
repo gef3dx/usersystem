@@ -15,7 +15,7 @@
                             title="Upload new image">
                     </label>
             {% else %}
-                <img class="rounded-circle account-img profile-image", src="{{ form.instance.image.url }}">
+                <img class="rounded-circle account-img profile-image" width="200px" src="{{ form.instance.image.url }}">
             {% endif %}
             <div class="media-body">
                 <h2 class="account-heading">{{ form.instance.username }}
@@ -24,6 +24,9 @@
                 <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
                 <p class="text-secondary">{{ form.instance.email }}</p>
                 <p class="text-secondary">{{ form.instance.description }}</p>
+                {% if user.username != form.instance.username %}
+                    <a href="{% url 'thread' form.instance.id %}">Отправить сообщение</a>
+                {% endif %}
             </div>
         </div>
 

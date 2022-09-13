@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import ThreadModel, MessageModel
 from django.db.models import Q
 from users.models import CustomUser as User
@@ -53,7 +53,8 @@ def CreateThread(request):
 def ThreadView(request, pk):
     if request.user.is_authenticated:
         form = MessageForm()
-        thread = ThreadModel.objects.get(pk=pk)
+        thread = get_object_or_404(ThreadModel, pk=pk)
+
         message_list = MessageModel.objects.filter(thread__pk__contains=pk)
         context = {
             'thread': thread,

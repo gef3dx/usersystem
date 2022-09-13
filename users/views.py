@@ -15,6 +15,7 @@ from .forms import UserRegistrationForm, UserLoginForm, UserUpdateForm, SetPassw
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from .models import SubscribedUsers
+from django.http import Http404
 
 def activate(request, uidb64, token):
     user = get_user_model()
@@ -134,7 +135,7 @@ def profile(request, username):
             context={"form": form}
             )
     
-    return redirect("homepage")
+    return redirect("home")
 
 @login_required
 def password_change(request):

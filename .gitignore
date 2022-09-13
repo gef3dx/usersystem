@@ -4,7 +4,6 @@ static/admin
 static/django_tinymce
 static/fontawesomefree
 static/tinymce
-media/
 temp/
 users/migrations
 message/migrations
