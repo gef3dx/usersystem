@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetP
 from django.contrib.auth import get_user_model
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
+from tinymce.widgets import TinyMCE
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -36,6 +37,7 @@ class UserLoginForm(AuthenticationForm):
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
+    description = forms.CharField(widget=forms.Textarea(attrs={'class':'thread'}))
 
     class Meta:
         model = get_user_model()

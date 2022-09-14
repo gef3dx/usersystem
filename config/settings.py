@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mptt',
     'users',
     'tinymce',
     'fontawesomefree',
@@ -181,3 +182,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'image_caption': True,
     "images_upload_url": "upload_image",
 }
+
+MPTT_ADMIN_LEVEL_INDENT = 20
